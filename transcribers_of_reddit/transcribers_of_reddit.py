@@ -147,7 +147,7 @@ class TranscribersOfReddit(tfds.core.GeneratorBasedBuilder):
     for _, row in full_transcriptions.iterrows():
       image_path = urllib.parse.urlparse(row['url']).path.split('/')[-1]
       yield image_path, {
-          'image': images_path / image_path,
+          'image': os.path.join(images_path, image_path),
           'transcription_category': str(row['category']).replace('TranscriptionCategory.', ''),
           'transcription': row['body']
       }
