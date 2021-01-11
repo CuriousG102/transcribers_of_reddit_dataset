@@ -3,7 +3,6 @@
 import collections
 import enum
 import os
-import pathlib
 import re
 import urllib
 
@@ -105,15 +104,15 @@ class TranscribersOfReddit(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     # TODO(transcribers_of_reddit): Downloads the data and defines the splits
-    manual_dir = pathlib.Path(dl_manager.manual_dir)
-    images_path = dl_manager.extract(
-      manual_dir / 'tor_images.zip')
-    comments_path = manual_dir / 'tor_comments.csv'
-    submissions_path = manual_dir / 'tor_submissions.csv'
+    images_path = dl_manager.extract(os.path.join(
+      dl_manager.manual_dir, 'tor_images.zip'))
+    comments_path = os.path.join(dl_manager.manual_dir, 'tor_comments.csv')
+    submissions_path = os.path.join(dl_manager.manual_dir, 'tor_submissions.csv')
 
     # TODO(transcribers_of_reddit): Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        'train': self._generate_examples(images_path / 'images', comments_path, submissions_path),
+        'train': self._generate_examples(
+          images_path / 'images', comments_path, submissions_path),
     }
 
   def _generate_examples(self, images_path, comments_path, submissions_path):
