@@ -2,3 +2,4 @@
 .DS_Store
 data/
 manual_dataset/
+transcribers_of_reddit/__pycache__/
