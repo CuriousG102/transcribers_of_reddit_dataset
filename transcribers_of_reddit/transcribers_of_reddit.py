@@ -112,7 +112,7 @@ class TranscribersOfReddit(tfds.core.GeneratorBasedBuilder):
     # TODO(transcribers_of_reddit): Returns the Dict[split names, Iterator[Key, Example]]
     return {
         'train': self._generate_examples(
-          images_path / 'images', comments_path, submissions_path),
+          os.path.join(images_path, 'images'), comments_path, submissions_path),
     }
 
   def _generate_examples(self, images_path, comments_path, submissions_path):
